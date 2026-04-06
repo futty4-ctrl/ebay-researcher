@@ -1,15 +1,33 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import "./globals.css"
+import ServiceWorkerRegister from "./components/ServiceWorkerRegister"
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#0654ba",
+}
 
 export const metadata: Metadata = {
-  title: "eBay Researcher",
+  title: "eBayリサーチャー",
   description: "eBay輸出リサーチ＆仕入れ判定ツール",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "eBayリサーチャー",
+  },
+  icons: {
+    apple: "/icon-192.png",
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
       <body>
+        <ServiceWorkerRegister />
         <div style={{ display: "flex", minHeight: "100vh" }}>
           <nav style={{
             position: "fixed", top: 0, left: 0, bottom: 0, width: 200,
